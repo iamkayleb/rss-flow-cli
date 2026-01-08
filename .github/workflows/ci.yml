@@ -1,16 +1,11 @@
 name: CI
 on:
-  workflow_call:
-    inputs:
-      marker:
-        type: string
-        default: "not quarantine and not slow"
-      python-version:
-        type: string
-        default: "3.12"
+   push:
+    branches: [ "main" ]
+   workflow_dispatch: 
 jobs:
   ci:
     uses: stranske/Workflows/.github/workflows/reusable-10-ci-python.yml@main
     with:
       marker: ${{ inputs.marker }}
-      python-version: ${{ inputs['python-version'] }}
+      python-version: ${{ inputs["python-version"]}}
