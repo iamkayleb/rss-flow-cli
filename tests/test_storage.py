@@ -4,7 +4,6 @@ from pathlib import Path
 # ensure src is importable
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-import sqlite3
 from rss_flow_cli.storage import Storage
 
 
