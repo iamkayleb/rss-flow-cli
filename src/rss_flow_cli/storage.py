@@ -24,7 +24,7 @@ class Storage:
         )
         self.conn.commit()
 
-    def has_guid(self, guid: str) -> bool:
+    def has_guid(self, guid: Optional[str]) -> bool:
         if not guid:
             return False
         cur = self.conn.cursor()
