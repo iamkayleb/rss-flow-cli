@@ -1,7 +1,7 @@
-from typing import Dict, List
+from typing import Any, Dict, List, Optional
 
 
-def parse_entries(feed) -> List[Dict]:
+def parse_entries(feed: Any) -> List[Dict[str, Optional[str]]]:
     """Given a feedparser-parsed feed, return a list of dicts with keys:
     'guid', 'title', 'link', 'summary', 'published'
     """

@@ -1,13 +1,14 @@
 import sqlite3
+from typing import Dict, Iterator, Optional
 
 
 class Storage:
-    def __init__(self, db_path: str = ":memory:"):
+    def __init__(self, db_path: str = ":memory:") -> None:
         self.db_path = db_path
         self.conn = sqlite3.connect(self.db_path, check_same_thread=False)
         self._init_db()
 
-    def _init_db(self):
+    def _init_db(self) -> None:
         cur = self.conn.cursor()
         cur.execute(
             """
@@ -46,7 +47,7 @@ class Storage:
         self.conn.commit()
         return cur.rowcount > 0
 
-    def list_entries(self, limit: int = 100):
+    def list_entries(self, limit: int = 100) -> Iterator[Dict[str, Optional[str]]]:
         cur = self.conn.cursor()
         cur.execute("SELECT guid, title, link, summary, published FROM articles ORDER BY id DESC LIMIT ?", (limit,))
         for row in cur.fetchall():
