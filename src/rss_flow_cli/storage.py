@@ -42,14 +42,23 @@ class Storage:
         cur = self.conn.cursor()
         cur.execute(
             "INSERT OR IGNORE INTO articles (guid, title, link, summary, published) VALUES (?, ?, ?, ?, ?)",
-            (guid, entry.get("title"), entry.get("link"), entry.get("summary"), entry.get("published")),
+            (
+                guid,
+                entry.get("title"),
+                entry.get("link"),
+                entry.get("summary"),
+                entry.get("published"),
+            ),
         )
         self.conn.commit()
         return cur.rowcount > 0
 
     def list_entries(self, limit: int = 100) -> Iterator[Dict[str, Optional[str]]]:
         cur = self.conn.cursor()
-        cur.execute("SELECT guid, title, link, summary, published FROM articles ORDER BY id DESC LIMIT ?", (limit,))
+        cur.execute(
+            "SELECT guid, title, link, summary, published FROM articles ORDER BY id DESC LIMIT ?",
+            (limit,),
+        )
         for row in cur.fetchall():
             yield {
                 "guid": row[0],

@@ -10,7 +10,13 @@ from rss_flow_cli.storage import Storage
 def test_storage_save_and_dedupe(tmp_path):
     db = tmp_path / "test.db"
     s = Storage(str(db))
-    entry = {"guid": "g1", "title": "T", "link": "http://x", "summary": "S", "published": "P"}
+    entry = {
+        "guid": "g1",
+        "title": "T",
+        "link": "http://x",
+        "summary": "S",
+        "published": "P",
+    }
     assert s.save_entry(entry) is True
     # duplicate should return False
     assert s.save_entry(entry) is False
