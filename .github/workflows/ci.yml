@@ -1,8 +1,11 @@
 name: CI
+permissions:
+  actions: read
+  contents: read
 on:
-   push:
+  push:
     branches: [ "main" ]
-   workflow_dispatch: 
+  workflow_dispatch:
 jobs:
   ci:
     uses: stranske/Workflows/.github/workflows/reusable-10-ci-python.yml@main
